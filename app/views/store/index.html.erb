@@ -4,9 +4,15 @@
 
 <h1>Your Pragmatic Catalog</h1>
 
+<% if session[:counter] > 5 %>
+  <p><%= pluralize(session[:counter], 'Visit', 'Visits') %> since adding to cart</p>
+<% end %>
+
 <% @products.each do |product| %>
   <div class="entry">
-    <%= image_tag(product.image_url) %>
+    <%= link_to image_tag(product.image_url),
+                line_items_path(:product_id) => product,
+                :method => :post %>
     <h3><%= product.title %></h3>
     <%= sanitize(product.description) %>
     <div class="price_line">
