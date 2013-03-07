@@ -5,6 +5,7 @@
       <td><%= item.quantity %>&times;</td>
       <td><%= item.product.title %></td>
       <td class="item_price"><%= number_to_currency(item.total_price) %></td>
+      <td><%= button_to 'Remove', item, :method => :delete %></td>
     </tr>
   <% end %>
 
@@ -15,5 +16,5 @@
 
 </table>
 
-<%= button_to 'Empty cart', @cart, :method => :delete,
+<%= button_to 'Empty cart', Cart.find(session[:cart_id]), :method => :delete,
     :confirm => 'Are you sure?' %>
